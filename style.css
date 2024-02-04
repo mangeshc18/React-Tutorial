@@ -1,0 +1,53 @@
+.parent{
+    background-color: red;
+    color: white;
+    font-size: 2rem;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+}
+
+.navbar ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+    background-color: red;
+    padding: 10px 20px;
+}
+
+.main {
+    /* background-color: red; */
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+
+    /* align-items: center; */
+
+
+}
+
+.hero-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+
+}
+
+.hero{
+    padding: 1rem;
+    
+}
+
+
+
+
+
