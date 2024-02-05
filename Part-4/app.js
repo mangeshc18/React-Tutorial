@@ -78,7 +78,6 @@ const HeroSection = (prop) => {
     };
 
 
-let Footer =  <Navigation />
 
 
 
