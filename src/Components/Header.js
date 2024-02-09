@@ -1,8 +1,10 @@
+import { LOGO_IMG_URL } from "../Utility/URL.JS";
+
 const Header = () => {
     return(
     <div className="Header-container">
     <div className="logo-container">
-        <img className="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm0fk70Y9sdkSYMVg4Y6PdgIiWL21XRL68JOHRZieXD_aPeMmWzKuYPmgYtKny1TOM2Do&usqp=CAU" alt="" />
+        <img className="logo" src={LOGO_IMG_URL} alt="" />
     </div>
     <div className="nav-container">
         <ul>

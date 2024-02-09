@@ -1,33 +1,79 @@
 import RestaurantList from "../Utility/RestaurantList";
 import RestaurantCard from "./RestaurantCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { YourComponent } from "./ShimmerUi";
+
 const Body = () => {
+  const [FilterRestList, setFilterRestList] = useState([]);
+  const [originalRestList, setOriginalRestList] = useState([]);
+  console.log("body rendered");
 
-  let [RestList, setRestList] = useState(RestaurantList)
-  console.log(RestList);
-  let HandleFilterClick = () => {
-    let TopRatedHotels = RestaurantList.filter((res) => res.info.avgRating > 4.5)
-    setRestList(TopRatedHotels)
-  }
-    
-    return(
+  const [inputSearch, setInputSearch] = useState();
+
+  
+
+  //lets call swiggy api using useEffect hook and render it on ui
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const Response = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.61610&lng=73.72860&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+    const data = await Response.json();
+    const RestaurnatLink =
+      data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
+        // console.log(RestaurnatLink);
+    setFilterRestList(RestaurnatLink);
+    setOriginalRestList(RestaurantList);
+  };
+  
+
+  return (
     <div className="main-container">
-    <div className="top-rated-btn">
-      <button className="btn" onClick={HandleFilterClick}>Top Rated</button>
-    </div>
-    <div className="card-container">
-
-    {
-      
-      RestList.map((Res) => {
+      <div className="label-container">
+        <button className="btn">
+          Top Rated
+        </button>
+        <button className="btn">
+          Remove Filter
+        </button>
+        <div className="input-container">
+      <input className="input" placeholder="search.." value={inputSearch} onChange={(e) => {
+        const inputValue = e.target.value;
+        setInputSearch(inputValue);
+        console.log(inputValue);
         
-        return <RestaurantCard key = { Res.info.id} {...Res}/>
-      })
+      }}/>
+      <button className="search-btn" onClick={() => {
+       const filterInput = originalRestList.filter((res) => {
+          return res?.info?.name?.toLowerCase().includes(inputSearch.toLowerCase());
+          
 
-    }
+          // setFilterRestList(filterInput)
+          console.log(filterInput);
+
+        });
+        setFilterRestList(filterInput);
+        
+
+        // console.log(filterInput);
+
+
+      }}>Search</button>
+        </div>
+
+      </div>
+
+      <div className="card-container">
+        {FilterRestList.map((Res) => {
+          return <RestaurantCard key={Res.info.id} {...Res} />;
+        })}
+      </div>
     </div>
-    </div>)
-
-}
+  );
+};
 
 export default Body;
