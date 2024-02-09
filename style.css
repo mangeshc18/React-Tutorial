@@ -37,7 +37,12 @@
 .nav-container ul li{
     padding: 0px 10px;
     font-size: 1.2rem;
+    /* text-decoration: none; */
 
+}
+
+.nav-link {
+    text-decoration: none;
 }
 
 

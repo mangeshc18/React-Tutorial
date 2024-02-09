@@ -8,7 +8,7 @@ const Body = () => {
   const [originalRestList, setOriginalRestList] = useState([]);
   console.log("body rendered");
 
-  const [inputSearch, setInputSearch] = useState();
+  const [inputSearch, setInputSearch] = useState("");
 
   
 
@@ -31,7 +31,7 @@ const Body = () => {
   };
   
 
-  return (
+  return originalRestList.length === 0 ? <YourComponent /> : (
     <div className="main-container">
       <div className="label-container">
         <button className="btn">
@@ -42,9 +42,10 @@ const Body = () => {
         </button>
         <div className="input-container">
       <input className="input" placeholder="search.." value={inputSearch} onChange={(e) => {
-        const inputValue = e.target.value;
+        let inputValue = e.target.value;
         setInputSearch(inputValue);
-        console.log(inputValue);
+        
+      
         
       }}/>
       <button className="search-btn" onClick={() => {
