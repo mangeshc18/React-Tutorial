@@ -1,7 +1,9 @@
-import RestaurantList from "../Utility/RestaurantList";
+
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import { YourComponent } from "./ShimmerUi";
+import {Link} from "react-router-dom";
+
 
 const Body = () => {
   const [FilterRestList, setFilterRestList] = useState([]);
@@ -19,7 +21,7 @@ const Body = () => {
 
   const fetchData = async () => {
     const Response = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.61610&lng=73.72860&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0948287&lng=74.74797889999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const data = await Response.json();
     const RestaurnatLink =
@@ -27,7 +29,7 @@ const Body = () => {
         ?.restaurants;
         // console.log(RestaurnatLink);
     setFilterRestList(RestaurnatLink);
-    setOriginalRestList(RestaurantList);
+    setOriginalRestList(RestaurnatLink);
   };
   
 
@@ -70,7 +72,7 @@ const Body = () => {
 
       <div className="card-container">
         {FilterRestList.map((Res) => {
-          return <RestaurantCard key={Res.info.id} {...Res} />;
+          return <Link key={Res.info.id} to={"/restaurants/"+Res.info.id}><RestaurantCard  {...Res} /></Link>;
         })}
       </div>
     </div>
